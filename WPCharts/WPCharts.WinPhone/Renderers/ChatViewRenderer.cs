@@ -18,51 +18,30 @@ namespace WPCharts.WinPhone.Renderers
 
         public ChatViewRenderer()
         {
-
-
-
-
         }
 
         protected override void OnModelSet()
         {
             base.OnModelSet();
 
-             chart = new C1Chart();
+            chart = new C1Chart();
             chart.Data.Children.Clear();
 
             chart.Margin = new System.Windows.Thickness(15, 0, 0, 0);
 
             // Add Data
-
             string[] ProductNames = { "Hand Mixer", "Stand Mixer", "Can Opener", "Toaster", "Blender", "Food Processor", "Slow Cooker", "Microwave" };
-
             int[] PriceX = { 80, 400, 20, 60, 150, 300, 130, 500 };
 
             // create single series for product price
-
             DataSeries ds1 = new DataSeries();
-
             ds1.Label = "Price X";
-
             //set price data
-
             ds1.ValuesSource = PriceX;
-
-
-
             // add series to the chart
-
             chart.Data.Children.Add(ds1);
-
-
-
-            // add item names
-
+             // add item names
             chart.Data.ItemNames = ProductNames;
-
-
-
             // Set chart type
 
             chart.ChartType = ChartType.Bar;
