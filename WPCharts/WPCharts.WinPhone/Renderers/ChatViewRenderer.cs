@@ -12,7 +12,7 @@ using C1.Phone.Chart;
 [assembly: ExportRenderer((typeof(Custom.ChartView)), typeof(WPCharts.WinPhone.Renderers.ChatViewRenderer))]
 namespace WPCharts.WinPhone.Renderers
 {
-    public class ChatViewRenderer : ViewRenderer <Custom.ChartView, C1Chart>
+    public class ChatViewRenderer : ViewRenderer<Custom.ChartView, C1Chart>
     {
         C1Chart chart;
 
@@ -31,9 +31,7 @@ namespace WPCharts.WinPhone.Renderers
                 return;
 
             chart.Data.Children.Clear();
-
             chart.Margin = new System.Windows.Thickness(15, 0, 0, 0);
-
             // Add Data
             string[] ProductNames = { "Hand Mixer", "Stand Mixer", "Can Opener", "Toaster", "Blender", "Food Processor", "Slow Cooker", "Microwave" };
             int[] PriceX = { 80, 400, 20, 60, 150, 300, 130, 500 };
@@ -43,29 +41,23 @@ namespace WPCharts.WinPhone.Renderers
             ds1.Label = "Price X";
             //set price data
             ds1.ValuesSource = PriceX;
-
             // add series to the chart
             chart.Data.Children.Add(ds1);
-             // add item names
-
+            // add item names
             chart.Data.ItemNames = ProductNames;
-            // Set chart type
-            chart.ChartType = ChartType.Bar;
+           
             SetNativeControl(chart);
-
         }
 
         protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
 
+            if (Control == null || Element == null)
+                return;
             if (e.PropertyName == Custom.ChartView.SelectedChartProperty.PropertyName)
-            {
-                if (Control == null || Element == null)
-                    return;
-		            Control.ChartType = Element.SelectedChart.ToChartType();
-                
-            }
+                Control.ChartType = Element.SelectedChart.ToChartType();
+
         }
 
     }

@@ -16,9 +16,10 @@ namespace WPCharts.CustomControls
     }
 
     public enum ChartType { 
-        Bar = 0,
-        Pie = 1,
-        PieDoughnut =2
+        Column = 0,
+        Bar = 1,
+        Pie = 2,
+        PieDoughnut = 3
         //add more if needed
     }
 }

@@ -10,6 +10,9 @@ namespace WPCharts.WinPhone.Renderers
     {
         public static C1.Phone.Chart.ChartType ToChartType(this WPCharts.CustomControls.ChartType chartType)
         {
+            if (chartType == CustomControls.ChartType.Column)
+                return C1.Phone.Chart.ChartType.Column;
+           
             if (chartType == CustomControls.ChartType.Bar)
                 return C1.Phone.Chart.ChartType.Bar;
             if (chartType == CustomControls.ChartType.Pie)
@@ -18,7 +21,7 @@ namespace WPCharts.WinPhone.Renderers
                 return C1.Phone.Chart.ChartType.PieDoughnut;
 
             //default
-            return C1.Phone.Chart.ChartType.Bar;
+            return C1.Phone.Chart.ChartType.Column;
         }
     }
 }

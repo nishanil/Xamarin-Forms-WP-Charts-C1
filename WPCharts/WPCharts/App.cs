@@ -21,6 +21,7 @@ namespace WPCharts
         Picker picker;
         public ChartPage()
         {
+
             Grid grid = new Grid
             {
                 HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -51,12 +52,19 @@ namespace WPCharts
                 picker.Items.Add(chartType.ToString());
             }
 
-            picker.SelectedIndex = 0;
+
+           
             picker.SelectedIndexChanged += picker_SelectedIndexChanged;
+
             grid.Children.Add(picker);
             grid.Children.Add(chart = new ChartView(), 0, 1);
+            
+            picker.SelectedIndex = 0;
 
+         
             this.Content = grid;
+
+
         }
 
         void picker_SelectedIndexChanged(object sender, EventArgs e)
