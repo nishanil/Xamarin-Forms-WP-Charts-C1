@@ -39,7 +39,6 @@ namespace WPCharts
                 }
 
             };
-
             picker = new Picker
             {
 
