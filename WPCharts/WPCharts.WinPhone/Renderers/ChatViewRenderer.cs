@@ -6,87 +6,64 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.WinPhone;
 using C1.Phone;
-using custom = WPCharts.CustomControls;
+using Custom = WPCharts.CustomControls;
 using C1.Phone.Chart;
 
-[assembly: ExportRenderer((typeof(custom.ChartView)), typeof(WPCharts.WinPhone.Renderers.ChatViewRenderer))]
+[assembly: ExportRenderer((typeof(Custom.ChartView)), typeof(WPCharts.WinPhone.Renderers.ChatViewRenderer))]
 namespace WPCharts.WinPhone.Renderers
 {
-    public class ChatViewRenderer : ViewRenderer <custom.ChartView, C1Chart>
+    public class ChatViewRenderer : ViewRenderer <Custom.ChartView, C1Chart>
     {
         C1Chart chart;
 
         public ChatViewRenderer()
         {
-
-
-
-
+            chart = new C1Chart();
         }
 
-        protected override void OnModelSet()
+        protected override void OnElementChanged(ElementChangedEventArgs<Custom.ChartView> e)
         {
-            base.OnModelSet();
+            base.OnElementChanged(e);
 
-             chart = new C1Chart();
+            if (e.OldElement != null || this.Element == null)
+                return;
+
             chart.Data.Children.Clear();
 
             chart.Margin = new System.Windows.Thickness(15, 0, 0, 0);
 
             // Add Data
-
             string[] ProductNames = { "Hand Mixer", "Stand Mixer", "Can Opener", "Toaster", "Blender", "Food Processor", "Slow Cooker", "Microwave" };
 
             int[] PriceX = { 80, 400, 20, 60, 150, 300, 130, 500 };
 
             // create single series for product price
-
             DataSeries ds1 = new DataSeries();
-
             ds1.Label = "Price X";
 
             //set price data
-
             ds1.ValuesSource = PriceX;
-
-
-
-            // add series to the chart
-
             chart.Data.Children.Add(ds1);
-
-
-
             // add item names
-
             chart.Data.ItemNames = ProductNames;
-
-
-
             // Set chart type
-
             chart.ChartType = ChartType.Bar;
-
             SetNativeControl(chart);
+
         }
 
-
-        protected override void HandlePropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == custom.ChartView.SelectedChartProperty.PropertyName)
+            base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == Custom.ChartView.SelectedChartProperty.PropertyName)
             {
-                var chartView = (custom.ChartView)sender;
-                if (chartView != null)
-                {
-                    if (chartView.SelectedChart == custom.ChartType.Bar)
-                        chart.ChartType = ChartType.Bar;
-                    if (chartView.SelectedChart == custom.ChartType.Pie)
-                        chart.ChartType = ChartType.Pie;
-                    if (chartView.SelectedChart == custom.ChartType.PieDoughnut)
-                        chart.ChartType = ChartType.PieDoughnut;
-                }
+                if (Control == null || Element == null)
+                    return;
+		            Control.ChartType = Element.SelectedChart.ToChartType();
+                
             }
-            base.HandlePropertyChanged(sender, e);
         }
+
     }
 }
