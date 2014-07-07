@@ -18,9 +18,7 @@ namespace WPCharts.WinPhone.Renderers
 
         public ChatViewRenderer()
         {
-
             chart = new C1Chart();
-
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Custom.ChartView> e)
@@ -57,10 +55,6 @@ namespace WPCharts.WinPhone.Renderers
                 return;
             if (e.PropertyName == Custom.ChartView.SelectedChartProperty.PropertyName)
                 Control.ChartType = Element.SelectedChart.ToChartType();
-            if (e.PropertyName == Custom.ChartView.ItemNamesProperty.PropertyName)
-            {
-                Control.Data.ItemNames = Element.ItemNames;
-            }
            
         }
 
