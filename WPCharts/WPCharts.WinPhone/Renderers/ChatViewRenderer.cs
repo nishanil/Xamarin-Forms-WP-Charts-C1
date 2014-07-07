@@ -38,7 +38,7 @@ namespace WPCharts.WinPhone.Renderers
 
             // create single series for product price
             DataSeries ds1 = new DataSeries();
-            ds1.Label = "Price X";
+            ds1.Label = "Chart Sample";
             //set price data
             ds1.ValuesSource = PriceX;
             // add series to the chart
@@ -57,7 +57,11 @@ namespace WPCharts.WinPhone.Renderers
                 return;
             if (e.PropertyName == Custom.ChartView.SelectedChartProperty.PropertyName)
                 Control.ChartType = Element.SelectedChart.ToChartType();
-
+            if (e.PropertyName == Custom.ChartView.ItemNamesProperty.PropertyName)
+            {
+                Control.Data.ItemNames = Element.ItemNames;
+            }
+           
         }
 
     }
